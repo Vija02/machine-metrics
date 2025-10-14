@@ -1,0 +1,17 @@
+services:
+  telegraf:
+    image: telegraf:1.34.4-alpine
+    container_name: telegraf-metrics
+    restart: unless-stopped
+    volumes:
+      - /:/hostfs:ro
+      - /etc/localtime:/etc/localtime:ro
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    privileged: true
+    network_mode: host
+    env_file: .env
+    environment:
+      - HOST_PROC=/hostfs/proc
+      - HOST_SYS=/hostfs/sys
+      - HOST_ETC=/hostfs/etc
+    pid: host
