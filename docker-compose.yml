@@ -11,6 +11,8 @@ services:
     privileged: true
     network_mode: host
     env_file: .env
+    user: root
+    entrypoint: "telegraf"
     environment:
       - HOST_PROC=/hostfs/proc
       - HOST_SYS=/hostfs/sys
